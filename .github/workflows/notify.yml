@@ -19,6 +19,11 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
           
+      - name: Debug info
+        run: |
+          echo "Token generated successfully"
+          echo "Attempting to notify repository: AGARBAC/secret-test"
+          
       - name: Notify evaluation server
         uses: peter-evans/repository-dispatch@v2
         with:
