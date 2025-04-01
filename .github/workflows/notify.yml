@@ -1,0 +1,17 @@
+name: Notify Evaluation Server
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify evaluation server
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.EVAL_PAT }}
+          repository: AGARBAC/secret-test
+          event-type: candidate-pr-created
+          client-payload: '{"repo": "${{ github.repository }}", "pr_number": "${{ github.event.pull_request.number }}", "ref": "${{ github.event.pull_request.head.ref }}", "sha": "${{ github.event.pull_request.head.sha }}", "fork_owner": "${{ github.event.pull_request.head.repo.owner.login }}"}' 
