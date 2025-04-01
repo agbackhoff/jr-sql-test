@@ -7,6 +7,12 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
+    # Add permissions to run without approval
+    permissions:
+      contents: read
+      pull-requests: write
+    # Only run on pull requests
+    if: github.event_name == 'pull_request'
     steps:
       - name: Notify evaluation server
         uses: peter-evans/repository-dispatch@v2
