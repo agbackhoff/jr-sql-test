@@ -22,12 +22,12 @@ jobs:
       - name: Debug info
         run: |
           echo "Token generated successfully"
-          echo "Attempting to notify repository: AGARBAC/secret-test"
+          echo "Attempting to notify repository: agbackhoff/secret-test"
           
       - name: Notify evaluation server
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ steps.generate_token.outputs.token }}
-          repository: AGARBAC/secret-test
+          repository: agbackhoff/secret-test
           event-type: candidate-pr-created
           client-payload: '{"repo": "${{ github.repository }}", "pr_number": "${{ github.event.pull_request.number }}", "ref": "${{ github.event.pull_request.head.ref }}", "sha": "${{ github.event.pull_request.head.sha }}", "fork_owner": "${{ github.event.pull_request.head.repo.owner.login }}"}' 
